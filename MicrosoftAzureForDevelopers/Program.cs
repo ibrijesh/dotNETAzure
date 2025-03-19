@@ -23,8 +23,8 @@ if (app.Environment.IsDevelopment())
 }
 
 
+app.MapGet("/persons", (AppDbContext db) => db.Persons.ToList());
 
 app.UseHttpsRedirection();
 
 app.Run();
-
