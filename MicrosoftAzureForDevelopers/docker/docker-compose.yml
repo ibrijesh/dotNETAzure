@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql_server
+    platform: linux/arm64
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Brijesh@123
+    ports:
+      - "1433:1433"
+    volumes:
+      - /Users/ibrijesh/Desktop/mysql_data_azure:/var/lib/mysql
+    networks:
+      - mssql_network
+    restart: always
+
+
+volumes:
+  mssql_data:
+
+networks:
+  mssql_network:
+    driver: bridge
