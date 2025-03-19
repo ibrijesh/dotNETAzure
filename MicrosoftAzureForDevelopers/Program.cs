@@ -25,7 +25,7 @@ if (app.Environment.IsDevelopment())
 
 app.MapGet("/persons", (AppDbContext db) => db.Persons.ToList());
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => "Hello World! " + app.Environment.EnvironmentName);
 
 app.UseHttpsRedirection();
 
