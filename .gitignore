@@ -8,7 +8,7 @@
 [Dd]ebug-osx/
 [Dd]ist/
 bin/
-/obj/
+obj/
 
 # User-specific files
 .vscode/
