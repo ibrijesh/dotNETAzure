@@ -1,0 +1,75 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Dd]ist/
+[Dd]ebug/
+[Dd]ebug-windows/
+[Dd]ebug-linux/
+[Dd]ebug-osx/
+[Dd]ist/
+bin/
+obj/
+
+# User-specific files
+.vscode/
+.idea/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows Installer files
+*.pdb
+*.dbmdl
+
+# .NET Core build directories
+project.lock.json
+project.fragment.lock.json
+
+# Tye
+.tye/
+
+# ASP.NET Core files
+wwwroot/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# .NET Core
+.nuget/
+
+# Rider
+.idea/
+
+# Windows Installer files
+*.vspscc
+*.vssscc
+
+# .NET Core SDK
+global.json
+
+# .NET Core runtime config
+project.assets.json
+
+# Logs
+logs/
+
+# Node modules and package-lock files (if using Node.js)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# ASP.NET Core development certificate
+https://docs.microsoft.com/en-us/aspnet/core/security/key-vault-configuration?view=aspnetcore-5.0
