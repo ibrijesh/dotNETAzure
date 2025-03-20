@@ -1,4 +1,7 @@
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Options;
 using MicrosoftAzureForDevelopers.Model;
 
@@ -20,8 +23,15 @@ if (builder.Environment.IsDevelopment())
 
 if (builder.Environment.IsProduction())
 {
-    var connectionString = builder.Configuration.GetConnectionString("ProdAzureSQLConnection");
-    Console.WriteLine(connectionString);
+    // Azure Key Vault URL
+    var keyVaultUrl = builder.Configuration.GetValue<string>("KeyVault:KeyVaultUrl");
+
+    // Create a Secret Client (Uses Managed Identity / Default Azure Credential)
+    var secretClient = new SecretClient(new Uri(keyVaultUrl), new DefaultAzureCredential());
+
+    // Fetch Azure SQL Connection String from Key Vault
+    KeyVaultSecret secret = secretClient.GetSecret("ProdAzureSQLConnection");
+    var connectionString = secret.Value;
     builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 }
 
@@ -38,7 +48,7 @@ if (app.Environment.IsDevelopment())
 
 app.MapGet("/persons", (AppDbContext db) => db.Persons.ToList());
 
-app.MapGet("/", () => "Hello World! " + app.Environment.EnvironmentName );
+app.MapGet("/", () => "Hello World! " + app.Environment.EnvironmentName);
 
 app.UseHttpsRedirection();
 
