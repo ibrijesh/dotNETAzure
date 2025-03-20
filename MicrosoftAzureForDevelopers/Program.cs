@@ -10,8 +10,21 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-var connectionString = builder.Configuration.GetConnectionString("AzureSQLConnection");
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+if (builder.Environment.IsDevelopment())
+{
+    var connectionString = builder.Configuration.GetConnectionString("DevAzureSQLConnection");
+    Console.WriteLine(connectionString);
+    builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+}
+
+
+if (builder.Environment.IsProduction())
+{
+    var connectionString = builder.Configuration.GetConnectionString("ProdAzureSQLConnection");
+    Console.WriteLine(connectionString);
+    builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+}
+
 
 var app = builder.Build();
 
@@ -25,7 +38,7 @@ if (app.Environment.IsDevelopment())
 
 app.MapGet("/persons", (AppDbContext db) => db.Persons.ToList());
 
-app.MapGet("/", () => "Hello World! " + app.Environment.EnvironmentName);
+app.MapGet("/", () => "Hello World! " + app.Environment.EnvironmentName );
 
 app.UseHttpsRedirection();
 
